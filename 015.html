@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Systems & Management - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;       
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;   
+            --text-black: #111111;         
+            --text-body: #3b4d44;          
+            --text-muted: #4a5c53;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.2); 
+            
+            /* SVG Specific Colors */
+            --svg-line: #8ca398;
+            --svg-board-bg: var(--primary-dark);
+            --svg-board-text: #ffffff;
+            --svg-exec-bg: var(--accent-gold-dark);
+            --svg-exec-text: #ffffff;
+            --svg-mgr-bg: var(--secondary-green);
+            --svg-mgr-text: var(--primary-dark);
+            --svg-coord-bg: #ffffff;
+            --svg-coord-border: var(--accent-gold);
+            --svg-coord-text: var(--primary-dark);
+            --svg-field-bg: #f8f9fa;
+            --svg-field-border: #d1d5db;
+            --svg-field-text: var(--text-body);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm; 
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Wide Canvas Padding */
+            overflow: hidden;
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 15px; 
+        }
+
+        .chapter-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 18px; 
+        }
+
+        /* --- 1. SYSTEMS GRID (Monitoring & AI side-by-side) --- */
+        .systems-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .system-box {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            padding: 18px 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            border-left: 4px solid var(--accent-gold);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .system-box.ai-box {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .system-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            background-color: rgba(198, 168, 124, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .system-box.ai-box .system-icon {
+            background-color: var(--secondary-green);
+        }
+
+        .system-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--accent-gold-dark);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .system-box.ai-box .system-icon svg {
+            stroke: var(--primary-dark);
+        }
+
+        .system-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .system-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .system-text {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-body);
+            font-weight: 500;
+        }
+
+        /* --- 2. SVG ORGANOGRAM CONTAINER --- */
+        .organogram-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            background-color: #fdfdfc;
+            border: 1px solid var(--secondary-green);
+            border-radius: 8px;
+            padding: 20px 10px; /* Reduced vertical padding */
+            overflow: hidden; 
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        /* Enhanced Premium Organogram Title Block */
+        .org-header-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 10px; /* Tightened */
+            width: 100%;
+        }
+
+        .org-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+        }
+
+        .org-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5px;
+            font-weight: 700;
+            color: var(--accent-gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .org-subtitle::before,
+        .org-subtitle::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            opacity: 0.7;
+        }
+
+        /* Wrapper for the SVG */
+        .svg-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            min-height: 0; /* Prevents container from blowing out */
+        }
+
+        /* Target the SVG itself to ensure it fits perfectly */
+        .svg-wrapper svg {
+            width: 90%; /* Scaled down slightly */
+            height: auto;
+            max-height: 420px; /* Strict height limit to save page space */
+        }
+
+        /* SVG Text Overrides */
+        .svg-wrapper text {
+            font-family: 'Inter', sans-serif !important;
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">07 // Systems & Management</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Monitoring & Organization</h1>
+
+        <div class="systems-grid">
+            
+            <div class="system-box">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                    </svg>
+                </div>
+                <div class="system-content">
+                    <div class="system-title">Monitoring Framework</div>
+                    <div class="system-text">The organisation is equipped with a highly effective and robust monitoring system. The Executive Director and the Programme Manager actively monitor all operational activities and programmes to ensure up-to-date compliance and progress at both the central office level and directly at the field implementation levels.</div>
+                </div>
+            </div>
+
+            <div class="system-box ai-box">
+                <div class="system-icon">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="14" x2="23" y2="14"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                </div>
+                <div class="system-content">
+                    <div class="system-title">Digital Innovation & AI</div>
+                    <div class="system-text">NEED Organisation is integrating digital tools and emerging technologies, including Artificial Intelligence (AI), to enhance programme efficiency, data management, and decision-making. AI-supported systems are being explored for monitoring, reporting, and improving outreach, enabling more effective and scalable interventions.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="organogram-container">
+            
+            <div class="org-header-block">
+                <h2 class="org-title">Organogram of NEED</h2>
+                <div class="org-subtitle">Structural Hierarchy & Reporting Lines</div>
+            </div>
+            
+            <div class="svg-wrapper">
+                <svg width="100%" viewBox="0 0 680 465" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M2 1L8 5L2 9" fill="none" stroke="var(--svg-line)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </marker>
+                    </defs>
+
+                    <line x1="340" y1="64" x2="340" y2="108" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="152" x2="340" y2="172" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="120" y1="172" x2="560" y2="172" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="120" y1="172" x2="120" y2="200" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="172" x2="340" y2="200" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="560" y1="172" x2="560" y2="200" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="120" y1="244" x2="120" y2="266" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="340" y1="244" x2="340" y2="266" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="560" y1="244" x2="560" y2="266" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="120" y1="266" x2="560" y2="266" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="120" y1="266" x2="120" y2="290" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="266" x2="340" y2="290" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="560" y1="266" x2="560" y2="290" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="120" y1="346" x2="120" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="52" y1="368" x2="188" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="52" y1="368" x2="52" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="120" y1="368" x2="120" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="188" y1="368" x2="188" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="346" x2="340" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="272" y1="368" x2="408" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="272" y1="368" x2="272" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="340" y1="368" x2="340" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="408" y1="368" x2="408" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="560" y1="346" x2="560" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="492" y1="368" x2="628" y2="368" fill="none" stroke="var(--svg-line)" stroke-width="1.5" />
+                    <line x1="492" y1="368" x2="492" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="560" y1="368" x2="560" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+                    <line x1="628" y1="368" x2="628" y2="390" fill="none" stroke="var(--svg-line)" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+                    <g>
+                      <rect x="250" y="20" width="180" height="44" rx="4" fill="var(--svg-board-bg)"/>
+                      <text x="340" y="42" text-anchor="middle" dominant-baseline="central" fill="var(--svg-board-text)" font-size="14px" font-weight="700" letter-spacing="1px" text-transform="uppercase">Board Members</text>
+                    </g>
+
+                    <g>
+                      <rect x="215" y="108" width="250" height="44" rx="4" fill="var(--svg-exec-bg)"/>
+                      <text x="340" y="130" text-anchor="middle" dominant-baseline="central" fill="var(--svg-exec-text)" font-size="12px" font-weight="700" letter-spacing="0.5px">Secretary / Executive Director</text>
+                    </g>
+
+                    <g>
+                      <rect x="20" y="200" width="200" height="44" rx="4" fill="var(--svg-mgr-bg)"/>
+                      <text x="120" y="222" text-anchor="middle" dominant-baseline="central" fill="var(--svg-mgr-text)" font-size="12px" font-weight="700">Program Manager</text>
+                    </g>
+                    <g>
+                      <rect x="240" y="200" width="200" height="44" rx="4" fill="var(--svg-mgr-bg)"/>
+                      <text x="340" y="222" text-anchor="middle" dominant-baseline="central" fill="var(--svg-mgr-text)" font-size="12px" font-weight="700">Administrative Officer</text>
+                    </g>
+                    <g>
+                      <rect x="460" y="200" width="200" height="44" rx="4" fill="var(--svg-mgr-bg)"/>
+                      <text x="560" y="222" text-anchor="middle" dominant-baseline="central" fill="var(--svg-mgr-text)" font-size="12px" font-weight="700">Financial Officer</text>
+                    </g>
+
+                    <g>
+                      <rect x="30" y="290" width="180" height="56" rx="4" fill="var(--svg-coord-bg)" stroke="var(--svg-coord-border)" stroke-width="2"/>
+                      <text x="120" y="312" text-anchor="middle" dominant-baseline="central" fill="var(--svg-coord-text)" font-size="12px" font-weight="700">Project Coordinator</text>
+                      <text x="120" y="330" text-anchor="middle" dominant-baseline="central" fill="var(--text-muted)" font-size="10px" font-weight="500">(Health)</text>
+                    </g>
+                    <g>
+                      <rect x="245" y="290" width="190" height="56" rx="4" fill="var(--svg-coord-bg)" stroke="var(--svg-coord-border)" stroke-width="2"/>
+                      <text x="340" y="312" text-anchor="middle" dominant-baseline="central" fill="var(--svg-coord-text)" font-size="12px" font-weight="700">Project Coordinator</text>
+                      <text x="340" y="330" text-anchor="middle" dominant-baseline="central" fill="var(--text-muted)" font-size="10px" font-weight="500">(Livelihood/Agriculture)</text>
+                    </g>
+                    <g>
+                      <rect x="470" y="290" width="180" height="56" rx="4" fill="var(--svg-coord-bg)" stroke="var(--svg-coord-border)" stroke-width="2"/>
+                      <text x="560" y="312" text-anchor="middle" dominant-baseline="central" fill="var(--svg-coord-text)" font-size="12px" font-weight="700">Project Coordinator</text>
+                      <text x="560" y="330" text-anchor="middle" dominant-baseline="central" fill="var(--text-muted)" font-size="10px" font-weight="500">(Education)</text>
+                    </g>
+
+                    <g>
+                        <rect x="22" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="52" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="52" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="90" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="120" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="120" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="158" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="188" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="188" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+
+                    <g>
+                        <rect x="242" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="272" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="272" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="310" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="340" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="340" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="378" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="408" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="408" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+
+                    <g>
+                        <rect x="462" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="492" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="492" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="530" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="560" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="560" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                    <g>
+                        <rect x="598" y="390" width="60" height="50" rx="4" fill="var(--svg-field-bg)" stroke="var(--svg-field-border)"/>
+                        <text x="628" y="410" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Field</text>
+                        <text x="628" y="426" text-anchor="middle" dominant-baseline="central" fill="var(--svg-field-text)" font-size="10px" font-weight="600">Worker</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 15</span>
+        </div>
+    </div>
+
+</body>
+</html>

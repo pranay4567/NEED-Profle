@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table of Contents - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;
+            --accent-gold: #c6a87c;        
+            --text-dark: #1a1a1a;
+            --text-muted: #4a5c53;
+            --bg-paper: #fdfdfc; 
+            --line-color: rgba(35, 83, 64, 0.2); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            overflow: hidden;
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* --- LEFT PANEL (Pure CSS Editorial side) --- */
+        .left-panel {
+            width: 32%;
+            height: 100%;
+            background: linear-gradient(145deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30mm 0;
+            z-index: 10;
+        }
+
+        /* Geometric Accents mirroring the cover page */
+        .abstract-line {
+            position: absolute;
+            left: 20mm;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(198, 168, 124, 0.15), transparent);
+            z-index: 1;
+        }
+
+        .abstract-circle {
+            position: absolute;
+            bottom: 45mm;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 140px;
+            height: 140px;
+            border: 1px solid rgba(198, 168, 124, 0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Outline Typography Effect */
+        .vertical-title {
+            position: relative;
+            z-index: 2;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            font-family: 'Inter', sans-serif;
+            font-size: 110px;
+            font-weight: 800;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.06); 
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .gold-title-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(180deg);
+            writing-mode: vertical-rl;
+            font-family: 'Playfair Display', serif;
+            font-size: 55px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            letter-spacing: 25px;
+            text-transform: uppercase;
+            z-index: 3;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .left-footer {
+            position: relative;
+            z-index: 2;
+            color: var(--accent-gold);
+            font-size: 10px;
+            letter-spacing: 5px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            text-transform: uppercase;
+        }
+
+        .gold-line {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--accent-gold);
+            z-index: 4;
+        }
+
+        /* --- RIGHT PANEL (Clean Content side) --- */
+        .right-panel {
+            width: 68%;
+            height: 100%;
+            padding: 25mm 20mm 25mm 22mm;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .header-brand {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 15mm;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-brand::after {
+            content: '';
+            display: block;
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--line-color);
+        }
+
+        /* TOC List Styling */
+        .toc-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Tighter gap for sub-items */
+            flex-grow: 1;
+        }
+
+        /* Chapter Group Headers */
+        .toc-chapter {
+            font-family: 'Playfair Display', serif;
+            font-size: 17.5px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .toc-chapter span {
+            color: var(--accent-gold-dark);
+            margin-right: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        /* Individual Items */
+        .toc-item {
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            padding-left: 15px; /* Indent sub-items under chapters */
+        }
+
+        .toc-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--text-body);
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            padding-right: 12px;
+            background-color: var(--bg-paper); 
+            position: relative;
+            z-index: 2;
+        }
+
+        .toc-leader {
+            flex-grow: 1;
+            height: 1px;
+            margin-bottom: 4px;
+            background-image: linear-gradient(to right, var(--line-color) 20%, rgba(255,255,255,0) 0%);
+            background-position: bottom;
+            background-size: 5px 1px;
+            background-repeat: repeat-x;
+            z-index: 1;
+        }
+
+        .toc-page {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            font-weight: 700;
+            font-style: italic;
+            color: var(--accent-gold-dark);
+            padding-left: 12px;
+            background-color: var(--bg-paper);
+            position: relative;
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        
+        <div class="left-panel">
+            <div class="abstract-line"></div>
+            <div class="abstract-circle"></div>
+
+            <div class="left-footer">Profile 2026</div>
+            
+            <div style="position: relative; height: 100%; width: 100%;">
+                <div class="vertical-title">INDEX</div>
+                <div class="gold-title-overlay">Contents</div>
+            </div>
+            
+            <div class="gold-line"></div>
+        </div>
+
+        <div class="right-panel">
+            
+            <div class="header-brand">NEED Organisation Overview</div>
+
+            <div class="toc-wrapper">
+                
+                <div class="toc-chapter"><span>01</span> Leadership</div>
+                <div class="toc-item">
+                    <span class="toc-text">Message from the Secretary</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">03</span>
+                </div>
+                <div class="toc-chapter"><span>02</span> Our Impact & Reach</div>
+                <div class="toc-item">
+                    <span class="toc-text">Our Impact in Numbers</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">04</span>
+                </div>
+
+                <div class="toc-chapter"><span>03</span> Strategic Foundation</div>
+                <div class="toc-item">
+                    <span class="toc-text">Vision & Mission Statements</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">05</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Philosophy & Organisation Purpose</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">05</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Core Values & Guiding Principles</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">05</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Organisation Beliefs</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">05</span>
+                </div>
+
+                <div class="toc-chapter"><span>04</span> Organisational Identity</div>
+                <div class="toc-item">
+                    <span class="toc-text">Organisational Details & Legal Information </span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">06</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Governing & Executive Body</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">07</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Advisory & Organisational Policies</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">08</span>
+                </div>
+                
+
+                <div class="toc-chapter"><span>05</span> Operational Scope</div>
+                <div class="toc-item">
+                    <span class="toc-text">Geographical Area of Operations</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">09</span>
+                </div>
+
+                <div class="toc-chapter"><span>06</span>Programme Portfolio </div>
+                <div class="toc-item">
+                    <span class="toc-text">Present Ongoing Projects</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">10-11</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Major Projects Implemented</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">12-13</span>
+                </div>
+
+                <div class="toc-chapter"><span>07</span> Systems & Management</div>
+                <div class="toc-item">
+                    <span class="toc-text">Operational Infrastructure & Finance</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">14</span>
+                </div>
+                <div class="toc-item">
+                    <span class="toc-text">Monitoring & Organization</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">15</span>
+                </div>
+
+                <div class="toc-chapter"><span>08</span> Credibility & Recognition</div>
+                <div class="toc-item">
+                    <span class="toc-text">Memberships & Accolades</span>
+                    <div class="toc-leader"></div>
+                    <span class="toc-page">16</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

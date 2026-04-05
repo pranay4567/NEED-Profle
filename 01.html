@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+        :root {
+            --primary-color: #0d1b16;      
+            --accent-gold: #c6a87c;        
+            --text-white: #ffffff;         
+            --text-neutral: #a0afa8;       
+            --line-color: rgba(198, 168, 124, 0.25); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .cover-page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--primary-color);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .cover-page { box-shadow: none; }
+        }
+
+        /* Hero Image & Overlays */
+        .hero-section {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 85%;
+            height: 75%;
+            background-image: url('./ap14.jpeg');
+            background-size: cover;
+            background-position: center 30%;
+            z-index: 1;
+        }
+
+        .overlay-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color) 15%, rgba(13, 27, 22, 0.6) 50%, transparent 100%),
+                        linear-gradient(0deg, var(--primary-color) 25%, rgba(13, 27, 22, 0.8) 50%, transparent 100%);
+            z-index: 2;
+        }
+
+        /* Creative Vertical Watermark */
+        .vertical-watermark {
+            position: absolute;
+            right: 15mm;
+            top: 15%;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Inter', sans-serif;
+            font-size: 140px;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.025);
+            letter-spacing: 20px;
+            text-transform: uppercase;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        /* Abstract Geometric Grid Elements */
+        .grid-line-vertical {
+            position: absolute;
+            left: 28mm;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background-color: var(--line-color);
+            z-index: 3;
+        }
+
+        .grid-line-horizontal {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 45mm;
+            height: 1px;
+            background-color: var(--line-color);
+            z-index: 3;
+        }
+
+        .corner-accent {
+            position: absolute;
+            right: 20mm;
+            bottom: 20mm;
+            width: 30mm;
+            height: 30mm;
+            border-right: 1px solid var(--accent-gold);
+            border-bottom: 1px solid var(--accent-gold);
+            opacity: 0.5;
+            z-index: 3;
+        }
+
+        /* --- REFINED UPPER BRAND AREA --- */
+        .brand-container {
+            position: absolute;
+            left: 28mm;
+            top: 45mm;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 28px; 
+            z-index: 10;
+        }
+
+        .logo-frame {
+            width: 85px; 
+            height: 85px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            overflow: hidden; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(198, 168, 124, 0.5); 
+            flex-shrink: 0;
+            margin-left: -42.5px; 
+        }
+
+        .logo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+            display: block;
+        }
+
+        /* Crisp, elegant solid divider */
+        .brand-divider {
+            height: 60px;
+            width: 1px;
+            background-color: var(--accent-gold);
+            opacity: 0.5;
+        }
+
+        .brand-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Refined Typography */
+        .brand-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 54px; 
+            font-weight: 400; 
+            color: var(--text-white);
+            letter-spacing: 14px; 
+            line-height: 1;
+            text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6); 
+            margin-right: -14px; 
+        }
+
+        .brand-subtext {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px; 
+            color: var(--accent-gold);
+            letter-spacing: 12px; 
+            text-transform: uppercase;
+            font-weight: 600; 
+            margin-top: 10px;
+            opacity: 0.95;
+            margin-right: -12px; 
+        }
+
+        /* --- UNTOUCHED BOTTOM CONTENT --- */
+        .content-container {
+            position: absolute;
+            left: 28mm;
+            bottom: 35mm;
+            width: calc(100% - 48mm);
+            z-index: 10;
+            padding-left: 12mm;
+            border-left: 3px solid var(--accent-gold);
+        }
+
+        .document-type {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            color: var(--text-white);
+            line-height: 1.05;
+            margin-bottom: 45px;
+            letter-spacing: -0.5px;
+        }
+
+        .main-title .light {
+            font-size: 52px;
+            font-weight: 400;
+        }
+
+        .main-title strong {
+            font-size: 64px;
+            font-weight: 700;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .main-title .year {
+            font-size: 48px;
+            font-weight: 400;
+            color: var(--accent-gold);
+            font-style: italic;
+            display: inline-block;
+            margin-left: 12px;
+        }
+
+        .org-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-white);
+            line-height: 1.6;
+            max-width: 480px;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--text-neutral);
+            letter-spacing: 0.5px;
+            margin-bottom: 30px; /* Added spacing to separate from URL */
+        }
+
+        /* --- NEW: WEBSITE URL --- */
+        .website-url {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            letter-spacing: 3px;
+            text-transform: lowercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .website-url::before {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 1px;
+            background-color: var(--accent-gold);
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cover-page">
+        <div class="hero-section"></div>
+        <div class="overlay-gradient"></div>
+        
+        <div class="vertical-watermark">IMPACT</div>
+
+        <div class="grid-line-vertical"></div>
+        <div class="grid-line-horizontal"></div>
+        <div class="corner-accent"></div>
+
+        <div class="brand-container">
+            <div class="logo-frame">
+                <img src="./Logo1.jpg" alt="logo">
+            </div>
+            
+            <div class="brand-divider"></div>
+            
+            <div class="brand-text-wrapper">
+                <div class="brand-text">NEED</div>
+                <div class="brand-subtext">NGO</div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <div class="document-type">About Us</div>
+            
+            <h1 class="main-title">
+                <span class="light">Organisation</span><br>
+                <strong>Profile</strong><span class="year">2026</span>
+            </h1>
+
+            <h2 class="org-name">National Environment And Education Development (NEED)</h2>
+            
+            <p class="tagline">“Empowering Communities. Transforming Lives.”</p>
+
+            <div class="website-url">www.needorganisation.com</div>
+        </div>
+    </div>
+
+</body>
+</html>

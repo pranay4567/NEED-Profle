@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Scope - NEED</title>
+    <style>
+        /* Import Premium Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap');
+
+        :root {
+            /* Premium NGO Color Palette */
+            --primary-color: #1a4231;      
+            --primary-light: #2a614a;
+            --secondary-green: #eef4f1;    
+            --accent-gold: #c2a373;        
+            --accent-gold-dark: #a38557;   
+            --text-main: #1d211f;         
+            --text-body: #4a544f;          
+            --text-muted: #738079;         
+            --bg-paper: #ffffff;           
+            --line-color: rgba(26, 66, 49, 0.15); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #dbe0de;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 20px;
+        }
+
+        /* Strict A4 Print Sizing */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Canvas Padding */
+            overflow: hidden; 
+        }
+
+        /* Force exact rendering for print/PDF */
+        @media print {
+            body { background-color: transparent; padding: 0; }
+            .page { box-shadow: none; }
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
+
+        /* --- Header --- */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .chapter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1.5px;
+            line-height: 1;
+        }
+
+        /* --- Typography --- */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        /* --- Editorial Intro Box --- */
+        .intro-box {
+            background-color: var(--secondary-green);
+            border-left: 4px solid var(--accent-gold);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .intro-box strong.box-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            color: var(--accent-gold-dark);
+            font-size: 13.5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .intro-box p {
+            font-size: 12.5px; /* Scaled up for readability */
+            line-height: 1.6;
+            color: var(--text-body);
+            font-weight: 500;
+        }
+
+        .intro-box b {
+            color: var(--primary-color);
+            font-weight: 800;
+        }
+
+        /* --- Map Container (Centered & Optimized for new margins) --- */
+        .maps-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Increased gap to utilize vertical space gracefully */
+            flex: 1; 
+            min-height: 0; 
+            align-items: center; /* Centers the maps horizontally */
+        }
+
+        .map-wrapper {
+            flex: 1; 
+            width: 85%; /* Increased from 75% to beautifully fill the wider page margins */
+            min-height: 0; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-card {
+            flex: 1;
+            width: 100%;
+            background-color: #fafcfb;
+            border: 1px solid var(--line-color);
+            border-radius: 8px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            min-height: 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .map-card::before {
+            content: 'Map Visualization';
+            position: absolute;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            z-index: 0;
+            opacity: 0.3;
+        }
+
+        .map-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Map Captions */
+        .map-caption {
+            font-size: 9.5px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-align: right;
+            margin-top: 8px;
+            padding-right: 5px;
+        }
+
+        /* --- Footer --- */
+        .page-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 15px;
+            font-weight: 600;
+            width: 100%; 
+        }
+        
+        .page-footer .page-num {
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        
+        <div class="page-header">
+            <div class="chapter-label">05 // Operational Scope</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Geographical Area of Operations</h1>
+
+        <div class="intro-box">
+            <strong class="box-title">Operational Footprint</strong>
+            <p>NEED Organisation operates actively to support and uplift disadvantaged populations across specifically targeted regions. Our core implementation zones include the <b>Parvatipuram Manyam</b>, <b>Vizianagaram</b>, <b>Dr. B.R. Ambedkar Konaseema</b>, and <b>Srikakulam</b> districts within the state of Andhra Pradesh. Expanding our regional footprint, our operational network in Odisha is intensely focused within the <b>Kalahandi</b> district.</p>
+        </div>
+
+        <div class="maps-stack">
+            
+            <div class="map-wrapper">
+                <div class="map-card">
+                    <img src="./Need Andhra Pradesh.png" alt="Map of Andhra Pradesh Operations">
+                </div>
+                <div class="map-caption">Figure 1.0 &mdash; Implementation Zones: Andhra Pradesh</div>
+            </div>
+
+            <div class="map-wrapper">
+                <div class="map-card">
+                    <img src="./Need Map Odisha.png" alt="Map of Odisha Operations">
+                </div>
+                <div class="map-caption">Figure 1.1 &mdash; Implementation Zones: Odisha</div>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span class="page-num">Page 09</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

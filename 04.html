@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Impact & Reach - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;       
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;   
+            --text-black: #111111;         
+            --text-body: #3b4d44;          
+            --text-muted: #4a5c53;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.2); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm; 
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 15mm 20mm; 
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 20px; 
+        }
+
+        .chapter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 6px; 
+        }
+
+        .intro-text {
+            font-size: 11.5px;
+            line-height: 1.6;
+            color: var(--text-body);
+            margin-bottom: 20px;
+            max-width: 85%;
+        }
+
+        /* --- 1. IMPACT IN NUMBERS (Top Stats Grid) --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: linear-gradient(145deg, var(--primary-dark) 0%, #17382b 100%);
+            border-radius: 6px;
+            padding: 25px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-gold);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle background glow effect */
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(198, 168, 124, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .stat-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--accent-gold);
+            line-height: 1;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5px;
+            font-weight: 700;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- 2. COMMUNITY EMPOWERMENT (Middle Grid) --- */
+        .sub-section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .empower-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .empower-card {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-left: 3px solid var(--primary-color);
+            border-radius: 4px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s ease;
+        }
+
+        .empower-icon-wrapper {
+            width: 45px;
+            height: 45px;
+            border-radius: 8px;
+            background-color: var(--secondary-green);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .empower-icon-wrapper svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--primary-dark);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .empower-data {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .empower-num {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+
+        .empower-label {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--text-body);
+            line-height: 1.4;
+        }
+
+        /* --- 3. KEY INTERVENTION AREAS (Bottom Tag Cloud) --- */
+        .interventions-wrapper {
+            background-color: #fafcfb;
+            border: 1px solid var(--secondary-green);
+            border-radius: 8px;
+            padding: 25px;
+            flex-grow: 1;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            background-color: #ffffff;
+            border: 1px solid rgba(198, 168, 124, 0.4);
+            color: var(--primary-dark);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s;
+        }
+
+        .tag:nth-child(even) {
+            background-color: rgba(198, 168, 124, 0.05);
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 25px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">02 // Our Impact & Reach</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Our Impact in Numbers</h1>
+        <p class="intro-text">Since 1998, our continuous efforts have made a tangible, measurable difference in the lives of thousands. Here is a statistical snapshot of our developmental journey.</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-val">25+</div>
+                <div class="stat-label">Years of<br>Service</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val">58+</div>
+                <div class="stat-label">Projects<br>Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val">14+</div>
+                <div class="stat-label">Districts<br>Covered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-val">100K+</div>
+                <div class="stat-label">Lives<br>Impacted</div>
+            </div>
+        </div>
+
+        <h2 class="sub-section-title">Community Empowerment</h2>
+        <p class="intro-text">We believe in aggressively empowering individuals with the critical skills, resources, and knowledge they need to thrive. Our targeted programs have consistently delivered scalable results.</p>
+
+        <div class="empower-grid">
+            
+            <div class="empower-card">
+                <div class="empower-icon-wrapper">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                        <path d="M7 15c1.5-1.5 3.5-2.5 5-2.5s3.5 1 5 2.5"></path>
+                    </svg>
+                </div>
+                <div class="empower-data">
+                    <div class="empower-num">6,000+</div>
+                    <div class="empower-label">Vulnerable Children Reached through Child Rehabilitation & Mainstreaming Initiatives</div>
+                </div>
+            </div>
+
+            <div class="empower-card">
+                <div class="empower-icon-wrapper">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <div class="empower-data">
+                    <div class="empower-num">3,000+</div>
+                    <div class="empower-label">Farmers reached in Agriculture Awareness</div>
+                </div>
+            </div>
+
+            <div class="empower-card">
+                <div class="empower-icon-wrapper">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <div class="empower-data">
+                    <div class="empower-num">1000+</div>
+                    <div class="empower-label">Youth Trained in Skill Development</div>
+                </div>
+            </div>
+
+            <div class="empower-card">
+                <div class="empower-icon-wrapper">
+                    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <div class="empower-data">
+                    <div class="empower-num">450+</div>
+                    <div class="empower-label">Helped Community-Based Organizations</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="interventions-wrapper">
+            <h2 class="sub-section-title">Key Intervention Areas</h2>
+            <p class="intro-text" style="margin-bottom: 0;">Since 1998, our work has spanned numerous interconnected sectors, each aimed specifically at fostering holistic, sustainable community development.</p>
+            
+            <div class="tag-cloud">
+                <div class="tag">Education</div>
+                <div class="tag">Health</div>
+                <div class="tag">Livelihoods</div>
+                <div class="tag">Environment & Forests</div>
+                <div class="tag">Disability Welfare</div>
+                <div class="tag">Urban Child Rehabilitation</div>
+                <div class="tag">People's Organisations</div>
+                <div class="tag">Advocacy & Campaigns</div>
+                <div class="tag">Networking & Alliances</div>
+                <div class="tag">Workshops & Seminars</div>
+                <div class="tag">Agriculture</div>
+                <div class="tag">Skill Development</div>
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 04</span>
+        </div>
+    </div>
+
+</body>
+</html>

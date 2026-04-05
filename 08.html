@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisory & Policies - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Established Green Theme */
+            --primary-color: #235340;      
+            --primary-dark: #1a3e30;
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;
+            --text-dark: #15241d;          
+            --text-body: #3b4d44;          
+            --text-muted: #6b7a72;
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.15); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Canvas Padding */
+            overflow: hidden;
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 12px;
+        }
+
+        .chapter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 5px;
+        }
+
+        .sub-heading {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .sub-heading::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--line-color);
+        }
+
+        /* --- Advisory Committee Section --- */
+        .advisory-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .advisory-intro {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-left: 4px solid var(--accent-gold);
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+        }
+
+        .advisory-intro p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: var(--text-body);
+            margin-bottom: 8px;
+        }
+
+        .advisory-intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            border-radius: 6px;
+            padding: 16px 12px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px; /* Ensures all cards are same height even with text wrapping */
+        }
+
+        .member-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: rgba(198, 168, 124, 0.15);
+            border: 1px solid rgba(198, 168, 124, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 8px;
+            flex-shrink: 0;
+        }
+
+        .member-icon svg {
+            width: 14px;
+            height: 14px;
+            stroke: var(--accent-gold);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .member-name {
+            font-family: 'Inter', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .member-role {
+            font-size: 9px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.4;
+        }
+
+        /* --- 3x3 Policies Grid --- */
+        .policies-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 15px;
+            flex-grow: 1; /* Fills remaining vertical space */
+            margin-bottom: 5px;
+        }
+
+        .policy-card {
+            background-color: #ffffff;
+            border: 1px solid var(--secondary-green);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 6px;
+            padding: 16px 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s ease;
+        }
+
+        .policy-card h5 {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Subtle policy icon */
+        .policy-card h5::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+        }
+
+        .policy-card p {
+            font-size: 11.5px;
+            line-height: 1.5;
+            color: var(--text-body);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 12px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">04 // Organisational Identity</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Advisory & Organisational Policies </h1>
+
+        <h2 class="sub-heading">Advisory Committee</h2>
+        <div class="advisory-wrapper">
+            <div class="advisory-intro">
+                <p>The Advisory Committee provides strategic guidance and specialized expertise to strengthen the organisation’s programmes and overall development.</p>
+                <p>It supports critical decision-making, enhances external partnerships, and actively contributes to the long-term sustainability of NEED.</p>
+            </div>
+
+            <div class="members-grid">
+                <div class="member-card">
+                    <div class="member-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="member-name">Abdul Sattar</div>
+                    <div class="member-role">Project Strategy & Planning</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="member-name">Pulivarthi Lakshmaiah</div>
+                    <div class="member-role">CSR Partnerships & Resource Mobilisation</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="member-name">K. Ravi Kiran</div>
+                    <div class="member-role">Project Coordination & Technical Support</div>
+                </div>
+                <div class="member-card">
+                    <div class="member-icon">
+                        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="member-name">B. Santhosh Dora</div>
+                    <div class="member-role">Programme Development & Proposal Support</div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="sub-heading">Organisational Policies</h2>
+        <div class="policies-grid">
+            
+            <div class="policy-card">
+                <h5>Confidentiality</h5>
+                <p>Protects sensitive information and rigorously maintains the confidentiality of all associated individuals, stakeholders, and partner organisations.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Conflict of Interest</h5>
+                <p>Ensures that every structural and financial decision is made exclusively in the best interest of the organisation, without personal or financial gain.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Diversity & Inclusion</h5>
+                <p>Actively promotes and sustains a culture of deep inclusivity, mutual respect, and diversity across all aspects of the organisation's work.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Financial Management</h5>
+                <p>Ensures highly responsible and compliant management of all finances, including advanced budgeting, strict accounting, and transparent reporting.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Governance Policy</h5>
+                <p>Clearly outlines the internal governance structure, defining specific roles, operational boundaries, and leadership responsibilities.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Human Resources</h5>
+                <p>Governs the comprehensive management of all staff, carefully guiding recruitment, performance management, and equitable employee benefits.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Information Technology</h5>
+                <p>Ensures the secure, ethical, and highly effective use of technology, deeply prioritizing data protection, backups, and internal cyber security.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Partnership Policy</h5>
+                <p>Guides the formation of the organisation's partnerships and strategic collaborations, ensuring sustainable, mutually beneficial relationships.</p>
+            </div>
+            
+            <div class="policy-card">
+                <h5>Safeguarding Policy</h5>
+                <p>Vigorously protects vulnerable individuals—including targeted children and at-risk adults—from any form of harm, neglect, or abuse.</p>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 08</span>
+        </div>
+    </div>
+
+</body>
+</html>

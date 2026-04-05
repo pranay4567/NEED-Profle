@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Details - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap');
+
+        :root {
+            /* Adjusted Theme for Maximum Readability */
+            --primary-color: #1a4230;      
+            --primary-dark: #10291d;
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #ab8642;        
+            --text-dark: #08120d;          
+            --text-body: #1e2e26;          
+            --text-muted: #506359;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(26, 66, 48, 0.2); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Maintained the new wider canvas */
+            overflow: hidden; /* Enforces strict bounding */
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 12px;
+        }
+
+        .chapter-label {
+            font-size: 12px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px; 
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        /* Data Dashboard Layout */
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px; /* Tightened gap to save vertical space */
+            flex-grow: 1;
+        }
+
+        .data-panel {
+            background-color: #ffffff;
+            border: 1px solid var(--secondary-green);
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .panel-header {
+            background-color: var(--secondary-green);
+            padding: 8px 15px; 
+            border-left: 4px solid var(--primary-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 10.5px; 
+            font-weight: 800; 
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .panel-body {
+            padding: 10px 15px; 
+        }
+
+        /* Key-Value Rows (Top Panels) */
+        .kv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 25px; 
+            row-gap: 8px; /* Tightened vertical gap */
+        }
+
+        .kv-row {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 4px;
+        }
+
+        .kv-row.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .kv-label {
+            font-size: 10px; 
+            font-weight: 800; 
+            color: var(--primary-color); 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .kv-value {
+            font-size: 12px; 
+            font-weight: 600; 
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .kv-value strong {
+            font-weight: 800;
+        }
+
+        /* Split Columns for lower section */
+        .split-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr; 
+            gap: 12px; 
+        }
+
+        /* Compliance & Banking */
+        .compact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px; /* Tightened to fit all 12 items */
+        }
+
+        .compact-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px dashed var(--line-color);
+            padding-bottom: 3px;
+        }
+
+        .compact-item span:first-child {
+            font-size: 12px; 
+            font-weight: 700; 
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .compact-item span:last-child {
+            font-size: 12px; 
+            color: var(--text-dark);
+            font-family: 'Inter', monospace; 
+            font-weight: 700; 
+            text-align: right;
+        }
+
+        .compact-subtext {
+            display: block;
+            font-size: 10.5px; 
+            color: var(--text-muted); 
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            margin-top: 1px;
+        }
+
+        /* Specific overrides for Bank Accounts block */
+        .bank-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            border-bottom: 1px dashed var(--line-color);
+            padding-bottom: 5px; 
+            gap: 2px;
+        }
+        
+        .bank-item .bank-name {
+            font-size: 11.5px; 
+            font-weight: 800; 
+            color: var(--primary-color);
+        }
+
+        .bank-item .bank-acc {
+            font-size: 12.5px; 
+            color: var(--text-dark);
+            font-family: 'Inter', monospace;
+            font-weight: 700; 
+        }
+
+        .bank-item .compact-subtext {
+            display: inline-block;
+            margin-left: 6px;
+            font-size: 9px;
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px; 
+            font-weight: 600; 
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <span style="display:none;"></span>
+        
+        <div class="page-header">
+            <div class="chapter-label">04 // Organisational Identity</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Organisational Details & Legal Information</h1>
+
+        <div class="dashboard-grid">
+            
+            <div class="data-panel">
+                <div class="panel-header">Organisation Identity & Contact</div>
+                <div class="panel-body kv-grid">
+                    <div class="kv-row full-width">
+                        <span class="kv-label">Name of the Organization</span>
+                        <span class="kv-value" style="font-size: 13.5px; font-weight: 800; color: var(--primary-color);">National Environment & Education Development (NEED)</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Registration</span>
+                        <span class="kv-value">Registered 1998 <br>Date 28.05.1998 (Society’s Registration Act of XXI of 1860, No. 185/1998)</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Chief Functionary / Founder</span>
+                        <span class="kv-value"><strong>P. Venugopala Rao</strong><br>Secretary / Executive Director</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Contact Information</span>
+                        <span class="kv-value">Mobile: 9440252618<br>Email: needvo@gmail.com ; needvo2@gmail.com</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Target Community</span>
+                        <span class="kv-value">Tribal, Backward classes, neglected and downtrodden communities in Rural & Urban Areas.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-panel">
+                <div class="panel-header">Operational Footprint</div>
+                <div class="panel-body kv-grid">
+                    <div class="kv-row">
+                        <span class="kv-label">Admin Office (Headquarters)</span>
+                        <span class="kv-value">Door.No.382, Jeypore Road, Near RTC Complex, Salur – 535591, Parvathipuram Manyam District, A.P.</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Digital Coordinates & Web</span>
+                        <span class="kv-value">Website: www.needorganisation.com<br>Lat: 18.523147, Long: 83.192215</span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Branch & Field Offices (A.P.)</span>
+                        <span class="kv-value">
+                            • Near Hotel Bhaska Grand, Bypass Rd, Parvathipuram<br>
+                            • Plot No.180/181, Sri Nivasam, KL Puram, Vizianagaram<br>
+                            • Special Need Children Home, Amalapuram, Konaseema
+                        </span>
+                    </div>
+                    <div class="kv-row">
+                        <span class="kv-label">Odisha State Office</span>
+                        <span class="kv-value">Ward No.2, Balaram Nagar, Sitabordipada, Bhawanipatna, District: Kalahandi, Odisha, India.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="split-grid">
+                
+                <div class="data-panel">
+                    <div class="panel-header">Statutory & Legal Registrations</div>
+                    <div class="panel-body compact-list">
+                        <div class="compact-item">
+                            <span>Income Tax PAN</span>
+                            <span>AAATN7601E</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Form 12A Reg <span class="compact-subtext">(Valid 2027-28 to 2036-37)</span></span>
+                            <span>AAATN7601E25HY01</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Sec 80G Exemption <span class="compact-subtext">(Valid 2027-28 to 2031-32)</span></span>
+                            <span>AAATN7601E25HY02</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Tax Deduction (TAN)</span>
+                            <span>VPNN00854A</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>FCRA Registration <span class="compact-subtext">(Valid 5 Yrs from 29.03.2022)</span></span>
+                            <span>010370048</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Ministry of Corporate Affairs</span>
+                            <span>CSR00023262</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>NITI Aayog Ngo Partnership</span>
+                            <span>AP/2016/0105926</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>GST Registration</span>
+                            <span>37AAATN7601E2ZR</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Govt of AP - Juvenile Welfare <span class="compact-subtext">(Valid to 2025)</span></span>
+                            <span>FRC/JW/020/PVPM/2025</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>Equal Opportunities Act 2016</span>
+                            <span>Reg No 1 of 2023</span>
+                        </div>
+                        <div class="compact-item">
+                            <span>ESIC & EPFO Certification <span class="compact-subtext">(PF & EF)</span></span>
+                            <span>70000699290000999 <br> GRVSP3536596000</span>
+                        </div>
+                        <div class="compact-item" style="border-bottom: none;">
+                            <span>MSME (Udyam) & Labour Dept</span>
+                            <span>UDYAM-AP-11-0057521 <br> Ap-14-11-088-03653387</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="data-panel">
+                    <div class="panel-header">Bank Accounts</div>
+                    <div class="panel-body compact-list">
+                        
+                        <div class="bank-item">
+                            <span class="bank-name">State Bank Of India, Salur</span>
+                            <span class="bank-acc">A/C: 11370748995 <span class="compact-subtext">IFSC: SBIN0000914</span></span>
+                        </div>
+                        
+                        <div class="bank-item">
+                            <span class="bank-name">HDFC BANK, Salur</span>
+                            <span class="bank-acc">A/C: 22141450000045 <span class="compact-subtext">IFSC: HDFC0002214</span></span>
+                        </div>
+                        
+                        <div class="bank-item">
+                            <span class="bank-name">AXIS Bank, Salur</span>
+                            <span class="bank-acc">A/C: 920010067446357 <span class="compact-subtext">IFSC: UTIB0004490</span></span>
+                        </div>
+                        
+                        <div class="bank-item" style="background-color: rgba(198, 168, 124, 0.15); padding: 6px 8px; border-radius: 4px; border-left: 3px solid var(--accent-gold);">
+                            <span class="bank-name" style="color: var(--text-dark);">SBI, SALUR – <strong>FCRA A/c</strong></span>
+                            <span class="bank-acc">A/C: 11370738001 <span class="compact-subtext">IFSC: SBIN0000914</span></span>
+                        </div>
+                        
+                        <div class="bank-item">
+                            <span class="bank-name">Union Bank of India</span>
+                            <span class="bank-acc">A/C: 050112100000393 <span class="compact-subtext">IFSC: UBIN0805017</span></span>
+                        </div>
+                        
+                        <div class="bank-item" style="border-bottom: none;">
+                            <span class="bank-name">Punjab National Bank, Odisha</span>
+                            <span class="bank-acc">A/C: 1693102100000579 <span class="compact-subtext">IFSC: PUNB0169310</span></span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 06</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

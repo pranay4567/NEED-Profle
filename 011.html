@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ongoing Projects - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;       
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;   
+            --text-black: #111111;         
+            --text-body: #3b4d44;          
+            --text-muted: #4a5c53;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.2); 
+            
+            /* Category Colors */
+            --cat-health: #e3f2fd;
+            --cat-health-text: #1565c0;
+            --cat-livelihood: #f1f8e9;
+            --cat-livelihood-text: #33691e;
+            --cat-edu: #fff3e0;
+            --cat-edu-text: #e65100;
+            --cat-comm: #f3e5f5;
+            --cat-comm-text: #6a1b9a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm; 
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Canvas Padding */
+            overflow: hidden; /* Forces rigid A4 bounds */
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 10px; 
+        }
+
+        .chapter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 10px; 
+        }
+
+        /* Grid Layout for Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 1fr); 
+            gap: 8px 12px; /* Tightened gap to prevent vertical overflow */
+            flex-grow: 1;
+            min-height: 0; /* Crucial for preventing grid blowout */
+        }
+
+        /* Project Card Design */
+        .project-card {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            padding: 10px 12px 22px 12px; /* Tightened padding */
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+            position: relative;
+            gap: 6px; 
+            overflow: hidden; /* Keeps text strictly inside the card */
+        }
+
+        /* Top row: Title and Years */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start; 
+            border-bottom: 1px solid var(--secondary-green);
+            padding-bottom: 6px;
+            gap: 8px;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        .project-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px; /* Reduced for fit */
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .project-years {
+            font-size: 9px; 
+            font-weight: 700;
+            color: var(--accent-gold-dark);
+            background-color: var(--bg-paper);
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid rgba(198, 168, 124, 0.3);
+            white-space: nowrap;
+        }
+
+        /* Smart Logo Container */
+        .project-logo {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            height: 42px; /* Scaled down logo height */
+            flex-shrink: 0;
+            gap: 4px;
+        }
+
+        .project-logo img {
+            height: 100%;
+            width: auto;
+            max-width: 45px; 
+            object-fit: contain; 
+            mix-blend-mode: multiply; 
+            background-color: #fafafa;
+            border-radius: 3px;
+            padding: 2px; 
+            border: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+        }
+
+        .project-logo img[src=""] {
+            display: none; 
+        }
+
+        /* Middle row: Funder, Area */
+        .meta-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; 
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .meta-label {
+            font-size: 12px; 
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 42px; 
+            flex-shrink: 0;
+            padding-top: 1px;
+        }
+
+        .meta-value {
+            font-size: 12px; 
+            font-weight: 700;
+            color: var(--text-black);
+            line-height: 1.3;
+            padding-left: 10px;
+        }
+
+        .meta-value.funder {
+            color: var(--primary-color);
+        }
+
+        /* Description */
+        .project-desc {
+            font-size: 13px; /* Reduced for fit */
+            line-height: 1.4;
+            color: var(--text-body);
+            flex-grow: 1; 
+        }
+
+        .project-desc b {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        /* Category Badges */
+        .cat-badge {
+            position: absolute;
+            bottom: 6px; 
+            right: 10px;
+            font-size: 9px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        .cat-health { background-color: var(--cat-health); color: var(--cat-health-text); }
+        .cat-livelihood { background-color: var(--cat-livelihood); color: var(--cat-livelihood-text); }
+        .cat-education { background-color: var(--cat-edu); color: var(--cat-edu-text); }
+        .cat-community { background-color: var(--cat-comm); color: var(--cat-comm-text); }
+
+        /* Footer - This will now print correctly */
+        .page-footer {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">06 // Programme Portfolio</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Present Ongoing Projects</h1>
+
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Jal Jeevan Mission (JJM)</div>
+                        <div class="project-years">2022</div>
+                    </div>
+                    <div class="project-logo"><img src="./photos/logos/jjm.png" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Rural Water Supply & Sanitation (Govt of AP)</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Parvathipuram Manyam & Vizianagaram</span>
+                    </div>
+                </div>
+                <p class="project-desc">Providing comprehensive implementation support for the Jal Jeevan Mission to ensure safe, adequate, and sustainable drinking water access to rural households.</p>
+                <span class="cat-badge cat-community">Community</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Day Care Center</div>
+                        <div class="project-years">2023</div>
+                    </div>
+                    <div class="project-logo"><img src="./photos/logos/HIH.png" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">HIH Germany</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta Mandal</span>
+                    </div>
+                </div>
+                <p class="project-desc">Providing essential nutritional food and Teaching Learning Materials (TLM) to support the early childhood development of ST women and children in hilltop communities.</p>
+                <span class="cat-badge cat-education">Education</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">IEC Activities (Health & Safety)</div>
+                        <div class="project-years">2014 onwards</div>
+                    </div>
+                    <div class="project-logo"><img src="" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">ITDA</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Parvathipuram Manyam Dist (50 PVTG Villages)</span>
+                    </div>
+                </div>
+                <p class="project-desc">Conducting IEC campaigns via Kalajatha and pamphlets focusing on institutional deliveries, malaria, dengue, sickle cell anemia, safe hand wash, and preventing child marriages.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">National Vector Borne Disease Control (IRS)</div>
+                        <div class="project-years">2025</div>
+                    </div>
+                    <div class="project-logo"><img src="" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">DPH&FW, Govt of Andhra Pradesh</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Kurapam, Komarada, Madalingi & Gumma Laximi Puram</span>
+                    </div>
+                </div>
+                <p class="project-desc">Executing the second round of Indoor Residential Spraying (IRS) in malaria-prone villages to control mosquito populations, strictly adhering to health and safety guidelines.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Skill Dev: Mushroom Cultivation</div>
+                        <div class="project-years">2025</div>
+                    </div>
+                    <div class="project-logo"><img src="./photos/logos/manipal.png" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Manipal Foundation</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Vizianagaram</span>
+                    </div>
+                </div>
+                <p class="project-desc">Delivering specialized skill development and hands-on training programs in modern Mushroom Cultivation to foster self-employment and sustainable agricultural livelihoods.</p>
+                <span class="cat-badge cat-livelihood">Livelihood</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Youth Awareness Programme</div>
+                        <div class="project-years">2025</div>
+                    </div>
+                    <div class="project-logo"><img src="" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Dept of Youth Services (SETVIZ), Govt of AP</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Parvathipuram & Salur</span>
+                    </div>
+                </div>
+                <p class="project-desc">Organizing critical community awareness programs focusing on drug abuse prevention, road safety (helmets), combating eve-teasing, and stopping the illicit trafficking of women.</p>
+                <span class="cat-badge cat-community">Community</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Tree Plantation & Soak Pit Preparation</div>
+                        <div class="project-years">2025</div>
+                    </div>
+                    <div class="project-logo"><img src="" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">NEED Donations</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta & Salur Mandals</span>
+                    </div>
+                </div>
+                <p class="project-desc">Driving environmental conservation by supplying saplings for mass tree plantation drives and facilitating the preparation of soak pits to enhance local groundwater recharging.</p>
+                <span class="cat-badge cat-community">Community</span>
+            </div>
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Depositors Education & Financial Literacy</div>
+                        <div class="project-years">2025</div>
+                    </div>
+                    <div class="project-logo"><img src="" alt="Logo"></div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">NEED Donations</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta & Salur Mandals</span>
+                    </div>
+                </div>
+                <p class="project-desc">Conducting interactive workshops on safe banking practices, digital fraud prevention, and providing Q&A sessions on responsible borrowing and financial planning.</p>
+                <span class="cat-badge cat-education">Education</span>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 11</span>
+        </div>
+    </div>
+
+</body>
+</html>

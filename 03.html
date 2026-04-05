@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message from the Secretary - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* New Green Theme - Professional, rich, but not overly dark */
+            --primary-color: #235340;      
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --text-dark: #15241d;          
+            --text-body: #3b4d44;          
+            --text-muted: #7a8c83;
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.15); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm;
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Wide Canvas Padding */
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 25px;
+        }
+
+        .chapter-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px; /* Scaled up */
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1.1;
+            letter-spacing: -0.5px;
+            margin-bottom: 30px; /* Increased margin */
+        }
+
+        /* Main Content Flow */
+        .content-area {
+            flex-grow: 1;
+            font-size: 12px; /* Significantly Scaled up for Readability */
+            line-height: 1.7;
+            color: var(--text-body);
+            text-align: justify;
+        }
+
+        /* Floated Editorial Image */
+        .founder-profile {
+            float: left;
+            width: 170px; /* Increased size */
+            margin-right: 30px;
+            margin-bottom: 15px;
+            text-align: center;
+            shape-outside: circle(50% at 50% 40%); 
+        }
+
+        .image-frame {
+            width: 170px; /* Increased size */
+            height: 170px; /* Increased size */
+            border-radius: 50%;
+            /* Double ring effect using gold and green */
+            border: 2px solid var(--secondary-green);
+            padding: 5px;
+            background-color: var(--bg-paper);
+            box-shadow: 0 0 0 1px var(--accent-gold);
+            margin-bottom: 15px;
+        }
+
+        .image-frame img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: var(--secondary-green);
+            display: block;
+        }
+
+        .founder-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px; /* Scaled up */
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .founder-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 9.5px; /* Scaled up */
+            font-weight: 600;
+            color: #b8860b;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Typography styling */
+        .content-area p {
+            margin-bottom: 20px; /* Increased margin */
+        }
+
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-size: 60px; /* Scaled up */
+            font-weight: 700;
+            color: var(--primary-color);
+            float: left;
+            line-height: 0.8;
+            padding-right: 10px;
+            padding-top: 6px;
+        }
+
+        /* Compact Grid for Goals & Objectives */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px; /* Increased gap */
+            background-color: var(--secondary-green);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+            padding: 28px; /* Increased padding */
+            margin: 30px 0;
+            clear: both;
+        }
+
+        .strategy-col h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px; /* Scaled up */
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .strategy-col h3::before {
+            content: '';
+            display: block;
+            width: 25px;
+            height: 2px;
+            background-color: var(--accent-gold);
+        }
+
+        .strategy-col ul {
+            list-style: none;
+        }
+
+        .strategy-col li {
+            font-size: 12px; /* Scaled up */
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            padding-left: 16px;
+            position: relative;
+        }
+
+        .strategy-col li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 7px;
+            width: 5px;
+            height: 5px;
+            background-color: var(--accent-gold);
+            border-radius: 50%;
+        }
+
+        /* Signature */
+        .signature-block {
+            margin-top: 30px;
+            clear: both;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px; /* Scaled up */
+            color: var(--primary-color);
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 15px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        
+        <div class="page-header">
+            <div class="chapter-label">01 // Leadership</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Message from the Secretary</h1>
+
+        <div class="content-area">
+            
+            <div class="founder-profile">
+                <div class="image-frame">
+                    <img src="./Founder photo.jpeg" alt="">
+                </div>
+                <div class="founder-name">P. Venugopala Rao</div>
+                <div class="founder-title">Secretary / Executive Director</div>
+            </div>
+
+            <p class="drop-cap">Welcome to NEED Organisation. NEED was established in 1992 and officially registered in 1998 under the leadership of Mr. P. Venugopala Rao. It was founded as a compassionate response to the difficult living conditions of disadvantaged communities, aiming to restore dignity and create opportunities through dedicated service.</p>
+
+            <p>NEED Organisation is committed to empowering individuals and communities through education, skill development, and sustainable initiatives. We strive to bridge the gap between potential and opportunity, fostering a more equitable and prosperous society. We believe in empowering through compassion, educating through innovation, and transforming communities through collective action.</p>
+
+            <p><br>Our team works continuously to support holistic community development, especially for those deprived of basic rights and essential needs. Over the years, NEED has implemented various initiatives and made meaningful contributions across Andhra Pradesh and Odisha.</p>
+
+            <div class="strategy-grid">
+                <div class="strategy-col">
+                    <h3>Goals</h3>
+                    <ul>
+                        <li>Empower individuals and communities by enhancing their capacity and overall well-being through education, skill development, and support.</li>
+                        <li>Promote sustainable development by encouraging practices that benefit both people and the environment.</li>
+                        <li>Foster innovation and entrepreneurship to support job creation and economic growth.</li>
+                    </ul>
+                </div>
+                <div class="strategy-col">
+                    <h3>Objectives</h3>
+                    <ul>
+                        <li>Improve access to quality education and skill development opportunities.</li>
+                        <li>Enhance livelihoods by supporting initiatives that ensure economic stability.</li>
+                        <li>Build capacity by strengthening individuals, communities, and organisations.</li>
+                        <li>Promote collaboration by fostering partnerships to achieve shared goals.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p>We sincerely thank our management board, funders, and partner NGOs for their continued guidance and support in making our programmes successful.</p>
+
+            <p>We welcome feedback and suggestions as we continue our efforts to serve underprivileged and neglected communities and create a lasting positive impact.</p>
+
+            <div class="signature-block">
+                <div class="signature">Sincerely,</div>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 03</span>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credibility & Recognition - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;       
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;   
+            --text-black: #111111;         
+            --text-body: #3b4d44;          
+            --text-muted: #4a5c53;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.2); 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm; 
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Wide Canvas Padding */
+            overflow: hidden; /* Rigid A4 bounds */
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 12px; /* Tightened */
+        }
+
+        .chapter-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px; /* Slightly reduced */
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 10px; /* Tightened */
+        }
+
+        .sub-heading {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; /* Reduced */
+            font-weight: 800;
+            color: var(--accent-gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px; /* Tightened */
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sub-heading::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background-color: var(--line-color);
+        }
+
+        /* --- 1. MEMBERSHIPS & NETWORKS --- */
+        .memberships-wrapper {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 15px; /* Tightened to save space */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+        }
+
+        .membership-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .membership-table th {
+            background-color: var(--secondary-green);
+            color: var(--primary-dark);
+            font-size: 11px; /* Scaled down */
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 12px; /* Compressed padding */
+            text-align: left;
+            border-bottom: 1px solid var(--line-color);
+        }
+
+        .membership-table td {
+            padding: 7px 12px; /* Compressed padding */
+            font-size: 12px; /* Scaled down */
+            color: var(--text-body);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            vertical-align: middle;
+        }
+
+        .membership-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .membership-table tr:nth-child(even) {
+            background-color: #fafcfb;
+        }
+
+        /* Column Specific Styling */
+        .col-year {
+            width: 55px;
+            font-family: 'Inter', monospace;
+            font-weight: 700;
+            color: var(--accent-gold-dark);
+        }
+
+        .col-network {
+            font-weight: 700;
+            color: var(--primary-dark);
+            width: 45%;
+        }
+
+        .col-role {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 10.5px;
+        }
+
+        .col-loc {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- 2. AWARDS & ACCOLADES --- */
+        .awards-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Tightened from 12px to 8px */
+            flex-grow: 1; /* Pushes footer naturally to bottom */
+        }
+
+        .award-card {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-left: 4px solid var(--accent-gold);
+            border-radius: 6px;
+            padding: 10px 14px; /* Compressed padding */
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .award-icon-wrapper {
+            width: 36px; /* Scaled down */
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(198, 168, 124, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            border: 1px solid rgba(198, 168, 124, 0.3);
+        }
+
+        .award-icon-wrapper svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: var(--accent-gold-dark);
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .award-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 3px; /* Tightened */
+        }
+
+        .award-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .award-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px; /* Scaled down */
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .award-year {
+            font-size: 10px;
+            font-family: 'Inter', monospace;
+            font-weight: 700;
+            color: #ffffff;
+            background-color: var(--primary-color);
+            padding: 2px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .award-agency {
+            font-size: 10.5px; /* Scaled down */
+            font-weight: 600;
+            color: var(--text-body);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .award-recipient {
+            font-size: 10px;
+            color: var(--text-muted);
+            margin-top: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .award-recipient::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: var(--accent-gold);
+        }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px; /* Reduced from 15px */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">08 // Credibility & Recognition</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Memberships & Accolades</h1>
+
+        <h2 class="sub-heading">Memberships & Professional Networks</h2>
+        <div class="memberships-wrapper">
+            <table class="membership-table">
+                <thead>
+                    <tr>
+                        <th class="col-year">Year</th>
+                        <th class="col-network">Name of the Network / Committee</th>
+                        <th class="col-role">Designation</th>
+                        <th class="col-loc">Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-year">2003</td>
+                        <td class="col-network">CADME</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Rajahmundry</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2011</td>
+                        <td class="col-network">Welfare of Disable Welfare (DDRC)</td>
+                        <td class="col-role">Dist. Mgmt Team Member cum Convener</td>
+                        <td class="col-loc">Vizianagaram Dt.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2013</td>
+                        <td class="col-network">Fansa (Sanitation)</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Vizianagaram</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2020</td>
+                        <td class="col-network">NITI Aayog – COVID-19</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Vizianagaram</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2021</td>
+                        <td class="col-network">G.O. and NGO – Covid-19 Network</td>
+                        <td class="col-role">Nodal Officer (Nodal NGO)</td>
+                        <td class="col-loc">Manyam Vizianagaram</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2022</td>
+                        <td class="col-network">District Level Coordination & Monitoring</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Parvathipuram Manyam</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2023</td>
+                        <td class="col-network">District Education Committee</td>
+                        <td class="col-role">Member (Nodal NGO)</td>
+                        <td class="col-loc">Parvathipuram</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2023</td>
+                        <td class="col-network">District Vigilance & Monitoring Committee</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Parvathipuram Manyam</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2023</td>
+                        <td class="col-network">District Vigilance Committee - Civil Supply</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Vizianagaram Dt.</td>
+                    </tr>
+                    <tr>
+                        <td class="col-year">2025</td>
+                        <td class="col-network">Women and Child Welfare Committee</td>
+                        <td class="col-role">Member</td>
+                        <td class="col-loc">Parvatipuram Manyam</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2 class="sub-heading">Awards & Official Recognition</h2>
+        <div class="awards-grid">
+            
+            <div class="award-card">
+                <div class="award-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 15l-3.5 2 1-4-3-2.5 4-.5L12 6l1.5 4 4 .5-3 2.5 1 4z"></path>
+                    </svg>
+                </div>
+                <div class="award-content">
+                    <div class="award-header">
+                        <div class="award-title">District Individual Award (Best CEO)</div>
+                        <div class="award-year">2001 - 2002</div>
+                    </div>
+                    <div class="award-agency">Ministry of Youth Affairs and Sports, New Delhi</div>
+                    <div class="award-recipient">Received by P. Venugopala Rao</div>
+                </div>
+            </div>
+
+            <div class="award-card">
+                <div class="award-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M8 21h8M12 17v4M7 4h10M6 4v7c0 3.3 2.7 6 6 6s6-2.7 6-6V4"></path>
+                    </svg>
+                </div>
+                <div class="award-content">
+                    <div class="award-header">
+                        <div class="award-title">Best NGO Award</div>
+                        <div class="award-year">2002 - 2003</div>
+                    </div>
+                    <div class="award-agency">Ministry of Youth Affairs and Sports, New Delhi</div>
+                    <div class="award-recipient">Received by P. Venugopala Rao on behalf of NEED</div>
+                </div>
+            </div>
+
+            <div class="award-card">
+                <div class="award-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="7"></circle>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+                    </svg>
+                </div>
+                <div class="award-content">
+                    <div class="award-header">
+                        <div class="award-title">Best NGO Award (Ugadi Purashkar)</div>
+                        <div class="award-year">2004 - 2005</div>
+                    </div>
+                    <div class="award-agency">State Express Daily News Paper</div>
+                    <div class="award-recipient">Received by P. Venugopala Rao</div>
+                </div>
+            </div>
+
+            <div class="award-card">
+                <div class="award-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <div class="award-content">
+                    <div class="award-header">
+                        <div class="award-title">Appreciation Certificate for Warrior of Covid-19</div>
+                        <div class="award-year">2019 - 2020</div>
+                    </div>
+                    <div class="award-agency">District Collector, Vizianagaram, Andhra Pradesh</div>
+                    <div class="award-recipient">Received by P. Venugopala Rao</div>
+                </div>
+            </div>
+
+            <div class="award-card">
+                <div class="award-icon-wrapper">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path>
+                        <path d="M12 8v8M8 12h8"></path>
+                    </svg>
+                </div>
+                <div class="award-content">
+                    <div class="award-header">
+                        <div class="award-title">Haritha Mithra Award</div>
+                        <div class="award-year">2020 - 2021</div>
+                    </div>
+                    <div class="award-agency">District Collector, Vizianagaram, Andhra Pradesh</div>
+                    <div class="award-recipient">Received by P. Venugopala Rao</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 16</span>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Projects - NEED</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+        :root {
+            /* Premium Green & Gold Theme */
+            --primary-color: #235340;      
+            --primary-dark: #122b21;       
+            --secondary-green: #eaf1ed;    
+            --accent-gold: #c6a87c;        
+            --accent-gold-dark: #b59565;   
+            --text-black: #111111;         
+            --text-body: #3b4d44;          
+            --text-muted: #4a5c53;         
+            --bg-paper: #fdfdfc;           
+            --line-color: rgba(35, 83, 64, 0.2); 
+            
+            /* Category Colors */
+            --cat-health: #e3f2fd;
+            --cat-health-text: #1565c0;
+            --cat-livelihood: #f1f8e9;
+            --cat-livelihood-text: #33691e;
+            --cat-edu: #fff3e0;
+            --cat-edu-text: #e65100;
+            --cat-comm: #f3e5f5;
+            --cat-comm-text: #6a1b9a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; 
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* Print Accuracy & Layout */
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            height: 297mm; 
+            background-color: var(--bg-paper);
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            padding: 12mm 16mm; /* Standardized Canvas Padding */
+            overflow: hidden; /* Rigid A4 bounds */
+        }
+
+        @media print {
+            body { background-color: transparent; }
+            .page { box-shadow: none; }
+        }
+
+        /* Top Header */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--secondary-green);
+            margin-bottom: 10px; /* Tightened */
+        }
+
+        .chapter-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .brand-mark {
+            font-size: 14px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; 
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+            margin-bottom: 10px; /* Tightened */
+        }
+
+        /* Grid Layout for Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(4, 1fr); 
+            gap: 8px 12px; /* Tightened gaps to guarantee fit */
+            flex-grow: 1;
+            min-height: 0; /* Prevents overflow pushing */
+        }
+
+        /* Project Card Design */
+        .project-card {
+            background-color: #ffffff;
+            border: 1px solid var(--line-color);
+            border-radius: 6px;
+            padding: 10px 12px 22px 12px; /* Reduced internal padding to save height */
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.02);
+            position: relative;
+            gap: 6px; /* Tighter internal gaps */
+            overflow: hidden;
+        }
+
+        /* Top row: Title, Years, and Logo */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--secondary-green);
+            padding-bottom: 6px;
+            gap: 8px;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            align-items: flex-start;
+            flex-grow: 1;
+        }
+
+        .project-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px; /* Reduced to fit */
+            font-weight: 800;
+            color: var(--primary-dark);
+            line-height: 1.2;
+        }
+
+        .project-years {
+            font-size: 8.5px; 
+            font-weight: 700;
+            color: var(--accent-gold-dark);
+            background-color: var(--bg-paper);
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid rgba(198, 168, 124, 0.3);
+            white-space: nowrap;
+        }
+
+        /* Funder Logo Container */
+        .project-logo {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 4px; 
+            height: 42px; /* Scaled down logo height */
+            flex-shrink: 0;
+        }
+
+        .project-logo img {
+            height: 100%;
+            width: auto;
+            max-width: 45px; 
+            object-fit: contain; 
+            mix-blend-mode: multiply; 
+            background-color: #fafafa;
+            border-radius: 3px;
+            padding: 2px;
+            border: 1px solid rgba(0,0,0,0.03);
+            box-sizing: border-box;
+        }
+        
+        .project-logo img[src=""] {
+            display: none; 
+        }
+
+        /* Middle row: Funder, Area */
+        .meta-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 4px; 
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        .meta-label {
+            font-size: 12px; 
+            font-weight: 800;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            width: 42px; 
+            flex-shrink: 0;
+            padding-top: 1px;
+        }
+
+        .meta-value {
+            font-size: 12px; 
+            font-weight: 700;
+            color: var(--text-black);
+            line-height: 1.3;
+            padding-left: 10px;
+        }
+
+        .meta-value.funder {
+            color: var(--primary-color);
+        }
+
+        /* Description */
+        .project-desc {
+            font-size: 13px; /* Reduced for fit */
+            line-height: 1.4;
+            color: var(--text-body);
+            flex-grow: 1; 
+        }
+
+        /* Category Badges */
+        .cat-badge {
+            position: absolute;
+            bottom: 6px; 
+            right: 10px;
+            font-size: 9px; 
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 3px 8px;
+            border-radius: 20px;
+        }
+
+        .cat-health { background-color: var(--cat-health); color: var(--cat-health-text); }
+        .cat-livelihood { background-color: var(--cat-livelihood); color: var(--cat-livelihood-text); }
+        .cat-education { background-color: var(--cat-edu); color: var(--cat-edu-text); }
+        .cat-community { background-color: var(--cat-comm); color: var(--cat-comm-text); }
+
+        /* Footer */
+        .page-footer {
+            padding-top: 10px;
+            border-top: 1px solid var(--line-color);
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 10px; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <div class="page-header">
+            <div class="chapter-label">06 // Programme Portfolio</div>
+            <div class="brand-mark">NEED</div>
+        </div>
+
+        <h1 class="section-title">Major Projects Implemented</h1>
+
+        <div class="project-grid">
+            
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">CARE – STEP</div>
+                        <div class="project-years">2003-2007</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/care.svg" alt="CARE Logo">
+                        <img src="./photos/logos/EU.png" alt="Second Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">CARE India & European Commission</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta Mandal</span>
+                    </div>
+                </div>
+                <p class="project-desc">Focused on holistic rural development through Institution Building and Capacity Building for Community-Based Organizations, implementing watershed programs and food security.</p>
+                <span class="cat-badge cat-livelihood">Livelihood</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">APCFM (Forest Mgmt)</div>
+                        <div class="project-years">2003</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/forestlogo.png" alt="AP Forest Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Forest Dept, Govt of AP</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Salur Range</span>
+                    </div>
+                </div>
+                <p class="project-desc">Empowered local communities by forming Vana Samrakshana Samities (VSS), providing training on Non-Timber Forest Produce (NTFP), and constructing check dams.</p>
+                <span class="cat-badge cat-livelihood">Livelihood</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">VISHWAS – Water & Sanitation</div>
+                        <div class="project-years">2005-2006</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/nether2.avif" alt="Netherlands Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Netherlands Embassy</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta, GL Puram, Kurupam</span>
+                    </div>
+                </div>
+                <p class="project-desc">Conducted extensive Health, Hygiene, and Sanitation programs, including capacity building for local committees and awareness campaigns on safe drinking water.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">APCBTMP (Tank Mgmt)</div>
+                        <div class="project-years">2007-2008</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/SC.png" alt="Govt Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">I&CAD, Govt. Of AP</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Salur, Dattirajeru Mandals</span>
+                    </div>
+                </div>
+                <p class="project-desc">Organized capacity-building programs for Water User Associations, oversaw the rejuvenation of irrigation tanks, and developed agricultural technologies.</p>
+                <span class="cat-badge cat-livelihood">Livelihood</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Mobile Medical Unit</div>
+                        <div class="project-years">2007-2011</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/rural.jpeg" alt="NRHM Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">National Rural Health Mission</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Sub plan Mandals of ITDA</span>
+                    </div>
+                </div>
+                <p class="project-desc">Delivered essential primary and preventive healthcare services directly to remote and interior tribal villages through mobile clinics.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Revised National TB Control</div>
+                        <div class="project-years">2005-2009</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/SC.png" alt="Govt Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">State TB Control Project</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Vizianagaram, Srikakulam</span>
+                    </div>
+                </div>
+                <p class="project-desc">Executed widespread Information, Education, and Communication (IEC) activities and awareness programs in public gatherings to combat Tuberculosis.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">Rastriya Grameena Vikas Nidhi</div>
+                        <div class="project-years">2003-2010</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/rgvn.jpg" alt="RGVN Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">RGVN, Odisha</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">Pachipenta & Salur Mandals</span>
+                    </div>
+                </div>
+                <p class="project-desc">Provided crucial livelihood enhancement for the poor by offering financial assistance for Below Poverty Line (BPL) families through Income Generation activities.</p>
+                <span class="cat-badge cat-livelihood">Livelihood</span>
+            </div>
+
+            <div class="project-card">
+                <div class="card-header">
+                    <div class="header-text">
+                        <div class="project-title">District Disability Rehab Center</div>
+                        <div class="project-years">2010-2017</div>
+                    </div>
+                    <div class="project-logo">
+                        <img src="./photos/logos/justice.png" alt="Ministry Logo">
+                    </div>
+                </div>
+                <div class="meta-grid">
+                    <div class="meta-item">
+                        <span class="meta-label">Funder</span>
+                        <span class="meta-value funder">Ministry of Social Justice</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">Area</span>
+                        <span class="meta-value">34 Mandals in Vizianagaram</span>
+                    </div>
+                </div>
+                <p class="project-desc">Offered end-to-end support for persons with disabilities, including surveys, identification, rehabilitation, counselling, and the distribution of necessary aids.</p>
+                <span class="cat-badge cat-health">Health</span>
+            </div>
+
+        </div>
+
+        <div class="page-footer">
+            <span>Organisation Profile 2026</span>
+            <span>Page 12</span>
+        </div>
+    </div>
+
+</body>
+</html>
